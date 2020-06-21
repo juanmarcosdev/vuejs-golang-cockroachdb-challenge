@@ -3,9 +3,21 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"net/http"
+	"sort"
+	"time"
 
 	"github.com/valyala/fasthttp"
 )
+
+func stringInSliceOfStrings(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
 
 type JSONDef struct {
 	Servers          []ServersDef `json:"servers"`
@@ -26,8 +38,6 @@ type ServersDef struct {
 
 func GetQueriedDomains(ctx *fasthttp.RequestCtx) {
 	ctx.WriteString("Get funcionando!")
-	// mc := &MethodCaller{}
-	// endpoints := mc.GetSSLLabsInfo("netflix.com")
 }
 
 func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
@@ -37,26 +47,44 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	}
 	mc := &MethodCaller{}
 	endpoints := mc.GetSSLLabsInfo(domain)
-	servers_def := make([]ServersDef, len(endpoints))
+	serversDefInstantiation := make([]ServersDef, len(endpoints))
 	var country string
 	var organization string
 	for i, e := range endpoints {
 		country, organization = mc.ObtainIPCountryAndOrganization(e.IPAddress)
-		servers_def[i] = ServersDef{
+		serversDefInstantiation[i] = ServersDef{
 			Address:  e.IPAddress,
 			SslGrade: e.Grade,
 			Country:  country,
 			Owner:    organization,
 		}
 	}
+	sliceOfGrades := make([]string, len(endpoints))
+	for i, e := range endpoints {
+		sliceOfGrades[i] = e.Grade
+	}
+	sort.Strings(sliceOfGrades)
+	var lowerGrade string
+	isAinSlice := stringInSliceOfStrings("A", sliceOfGrades)
+	if isAinSlice && sliceOfGrades[len(endpoints)-1] == "A+" {
+		lowerGrade = "A"
+	}
+	lowerGrade = sliceOfGrades[len(endpoints)-1]
+	var clienteHTTP = &http.Client{Timeout: 20 * time.Second}
+	_, err2 := clienteHTTP.Get(domain)
+	var isServerDown bool
+	if err2 != nil {
+		isServerDown = true
+	}
+	isServerDown = false
 	jsonp := &JSONDef{
-		Servers: servers_def,
+		Servers:  serversDefInstantiation,
+		SslGrade: lowerGrade,
+		IsDown:   isServerDown,
 	}
 	jsons, err2 := json.Marshal(jsonp)
 	if err2 != nil {
 		log.Fatal(err2)
 	}
 	ctx.WriteString(string(jsons))
-	// country, organization := mc.ObtainIPCountryAndOrganization(domain)
-	// ctx.WriteString(country + "\n" + organization)
 }
