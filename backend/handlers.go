@@ -85,6 +85,11 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		fmt.Println("Hubo un error obteniendo el title")
 	}
 	hrefLogo := GetHrefLinkLogo(domain)
+	dbconnec, err3 := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
+	if err3 != nil {
+		fmt.Println("Hubieron problemas creando el conector a la BD")
+	}
+	fmt.Println("Conexión establecida!")
 	jsonp := &JSONDef{
 		Servers:  serversDefInstantiation,
 		SslGrade: lowerGrade,
@@ -92,9 +97,14 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		Title:    htmltitle,
 		Logo:     hrefLogo,
 	}
-	jsons, err2 := json.Marshal(jsonp)
+	jsonPrincipalByte, err2 := json.Marshal(jsonp)
 	if err2 != nil {
 		log.Fatal(err2)
 	}
-	ctx.WriteString(string(jsons))
+	jsonServersByte, err4 := json.Marshal(jsonp.Servers)
+	if err4 != nil {
+		log.Fatal(err4)
+	}
+	dbconnec.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now()::timestamp);")
+	ctx.WriteString(string(jsonPrincipalByte))
 }
