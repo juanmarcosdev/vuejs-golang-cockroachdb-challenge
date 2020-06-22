@@ -84,11 +84,13 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	if ok == false {
 		fmt.Println("Hubo un error obteniendo el title")
 	}
+	hrefLogo := GetHrefLinkLogo(domain)
 	jsonp := &JSONDef{
 		Servers:  serversDefInstantiation,
 		SslGrade: lowerGrade,
 		IsDown:   isServerDown,
 		Title:    htmltitle,
+		Logo:     hrefLogo,
 	}
 	jsons, err2 := json.Marshal(jsonp)
 	if err2 != nil {
