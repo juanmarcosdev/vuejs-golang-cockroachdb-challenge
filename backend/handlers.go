@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"sort"
@@ -71,16 +72,23 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	}
 	lowerGrade = sliceOfGrades[len(endpoints)-1]
 	var clienteHTTP = &http.Client{Timeout: 20 * time.Second}
-	_, err2 := clienteHTTP.Get(domain)
 	var isServerDown bool
+	respo, err2 := clienteHTTP.Get("http://www." + domain)
 	if err2 != nil {
+		log.Fatal(err2)
 		isServerDown = true
 	}
+	defer respo.Body.Close()
 	isServerDown = false
+	htmltitle, ok := ObtenerHTMLTitle(respo.Body)
+	if ok == false {
+		fmt.Println("Hubo un error obteniendo el title")
+	}
 	jsonp := &JSONDef{
 		Servers:  serversDefInstantiation,
 		SslGrade: lowerGrade,
 		IsDown:   isServerDown,
+		Title:    htmltitle,
 	}
 	jsons, err2 := json.Marshal(jsonp)
 	if err2 != nil {
