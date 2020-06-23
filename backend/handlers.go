@@ -105,6 +105,6 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	if err4 != nil {
 		log.Fatal(err4)
 	}
-	dbconnec.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now()::timestamp);")
+	dbconnec.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
 	ctx.WriteString(string(jsonPrincipalByte))
 }
