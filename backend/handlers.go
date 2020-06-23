@@ -91,29 +91,44 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		fmt.Println("Hubieron problemas creando el conector a la BD")
 	}
 	fmt.Println("Conexión establecida!")
+	var dominio string
+	var serversChanged bool
+	var previousSslGrade string
+	var jsonFromServerDB string
+	valueOfJSONByte, _ := json.Marshal(serversDefInstantiation)
+	valueOfJSONString := string(valueOfJSONByte)
+	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&dominio)
+	if errQuery == sql.ErrNoRows {
+		serversChanged = false
+		previousSslGrade = "null"
+		dbconnectorP.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + valueOfJSONString + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
+	} else {
+		errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&previousSslGrade)
+		errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&jsonFromServerDB)
+		if errQuery2 != nil {
+			fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
+		}
+		if errQuery3 != nil {
+			fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
+		}
+	}
+	if valueOfJSONString != jsonFromServerDB {
+		serversChanged = true
+	} else {
+		serversChanged = false
+	}
 	jsonp := &JSONDef{
-		Servers:  serversDefInstantiation,
-		SslGrade: lowerGrade,
-		IsDown:   isServerDown,
-		Title:    htmltitle,
-		Logo:     hrefLogo,
+		Servers:          serversDefInstantiation,
+		SslGrade:         lowerGrade,
+		IsDown:           isServerDown,
+		Title:            htmltitle,
+		Logo:             hrefLogo,
+		ServersChanged:   serversChanged,
+		PreviousSslGrade: previousSslGrade,
 	}
 	jsonPrincipalByte, err2 := json.Marshal(jsonp)
 	if err2 != nil {
 		log.Fatal(err2)
 	}
-	jsonServersByte, err4 := json.Marshal(jsonp.Servers)
-	if err4 != nil {
-		log.Fatal(err4)
-	}
-	var dominio string
-	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = '" + domain + "';").Scan(&dominio)
-	if errQuery == sql.ErrNoRows {
-		dbconnectorP.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
-	} else {
-		fmt.Println(dominio)
-	}
 	ctx.WriteString(string(jsonPrincipalByte))
-	// Consulta SQL para consultas de hace 1 hora o menos (de hace 50, 40, 30 min): SELECT dominio FROM endpoint_table WHERE hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';
-	// Consulta SQL para consultas de hace 1 hora o más (de hace 2, 3, horas): SELECT dominio FROM endpoint_table WHERE hora_consulta < NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';
 }
