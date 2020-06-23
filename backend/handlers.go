@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -85,7 +86,7 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		fmt.Println("Hubo un error obteniendo el title")
 	}
 	hrefLogo := GetHrefLinkLogo(domain)
-	dbconnec, err3 := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
+	dbconnectorP, err3 := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
 	if err3 != nil {
 		fmt.Println("Hubieron problemas creando el conector a la BD")
 	}
@@ -105,6 +106,14 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	if err4 != nil {
 		log.Fatal(err4)
 	}
-	dbconnec.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
+	var dominio string
+	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = '" + domain + "';").Scan(&dominio)
+	if errQuery == sql.ErrNoRows {
+		dbconnectorP.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + string(jsonServersByte) + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
+	} else {
+		fmt.Println(dominio)
+	}
 	ctx.WriteString(string(jsonPrincipalByte))
+	// Consulta SQL para consultas de hace 1 hora o menos (de hace 50, 40, 30 min): SELECT dominio FROM endpoint_table WHERE hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';
+	// Consulta SQL para consultas de hace 1 hora o más (de hace 2, 3, horas): SELECT dominio FROM endpoint_table WHERE hora_consulta < NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';
 }
