@@ -94,7 +94,8 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	var dominio string
 	var serversChanged bool
 	var previousSslGrade string
-	var jsonFromServerDB string
+	var jsonFromServerDB []byte
+	var jsonUnmarshalled []ServersDef
 	valueOfJSONByte, _ := json.Marshal(serversDefInstantiation)
 	valueOfJSONString := string(valueOfJSONByte)
 	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&dominio)
@@ -111,11 +112,15 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		if errQuery3 != nil {
 			fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
 		}
-	}
-	if valueOfJSONString != jsonFromServerDB {
-		serversChanged = true
-	} else {
 		serversChanged = false
+		fmt.Println(serversDefInstantiation)
+		json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
+		fmt.Println(jsonUnmarshalled)
+		for i := 0; i < len(serversDefInstantiation); i++ {
+			if serversDefInstantiation[i] != jsonUnmarshalled[i] {
+				serversChanged = true
+			}
+		}
 	}
 	jsonp := &JSONDef{
 		Servers:          serversDefInstantiation,
