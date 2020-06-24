@@ -1,12 +1,8 @@
 CREATE USER endpoints_admin;
 
-CREATE DATABASE endpoints_db;
-
-SET DATABASE = endpoints_db;
-
 SET TIMEZONE = 'America/Bogota';
 
-GRANT ALL ON DATABASE endpoints_db TO endpoints_admin;
+GRANT ALL ON DATABASE defaultdb TO endpoints_admin;
 
 CREATE TABLE endpoint_table(
     dominio varchar NOT NULL,

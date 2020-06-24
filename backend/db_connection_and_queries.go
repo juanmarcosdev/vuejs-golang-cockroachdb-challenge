@@ -12,7 +12,7 @@ type DBConnector struct {
 }
 
 func NewDBConnector(user string, dbname string, port string) (*DBConnector, error) {
-	newConnec, err := sql.Open("postgres", "user = "+user+" dbname = "+dbname+" sslmode=disable port = "+port)
+	newConnec, err := sql.Open("postgres", "host = database user = "+user+" dbname = "+dbname+" sslmode=disable port = "+port)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err

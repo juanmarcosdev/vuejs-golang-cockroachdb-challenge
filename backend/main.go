@@ -12,7 +12,7 @@ func main() {
 	router := fasthttprouter.New()
 	router.GET("/queried/domains", GetQueriedDomains)
 	router.POST("/info/servers/:domain", PostDomainAndGetInfo)
-	fmt.Println("server starting on localhost:5000")
-	log.Fatal(fasthttp.ListenAndServe("localhost:5000",
+	fmt.Println("server starting on port 5000")
+	log.Fatal(fasthttp.ListenAndServe(":5000",
 		router.Handler))
 }

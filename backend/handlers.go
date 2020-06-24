@@ -46,7 +46,7 @@ type DomainSearched struct {
 }
 
 func GetQueriedDomains(ctx *fasthttp.RequestCtx) {
-	dbconnectorP, err := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
+	dbconnectorP, err := NewDBConnector("endpoints_admin", "defaultdb", "26257")
 	if err != nil {
 		fmt.Println("Hubieron problemas creando el conector a la BD")
 	}
@@ -121,11 +121,12 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		fmt.Println("Hubo un error obteniendo el title")
 	}
 	hrefLogo := GetHrefLinkLogo(domain)
-	dbconnectorP, err3 := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
+	dbconnectorP, err3 := NewDBConnector("endpoints_admin", "defaultdb", "26257")
 	if err3 != nil {
 		fmt.Println("Hubieron problemas creando el conector a la BD")
+	} else {
+		fmt.Println("Conexión establecida!")
 	}
-	fmt.Println("Conexión establecida!")
 	var dominio string
 	var serversChanged bool
 	var previousSslGrade string
@@ -137,7 +138,7 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	if errQuery == sql.ErrNoRows {
 		serversChanged = false
 		previousSslGrade = "null"
-		dbconnectorP.connection.Query("INSERT INTO endpoints_db.endpoint_table VALUES ('" + domain + "','" + valueOfJSONString + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
+		dbconnectorP.connection.Query("INSERT INTO defaultdb.endpoint_table VALUES ('" + domain + "','" + valueOfJSONString + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
 	} else {
 		errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&previousSslGrade)
 		errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&jsonFromServerDB)
@@ -148,9 +149,7 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 			fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
 		}
 		serversChanged = false
-		fmt.Println(serversDefInstantiation)
 		json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
-		fmt.Println(jsonUnmarshalled)
 		for i := 0; i < len(serversDefInstantiation); i++ {
 			if serversDefInstantiation[i] != jsonUnmarshalled[i] {
 				serversChanged = true
