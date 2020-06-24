@@ -38,8 +38,43 @@ type ServersDef struct {
 	Owner    string `json:"owner"`
 }
 
+type ItemsList struct {
+	Items []DomainSearched `json:"items"`
+}
+type DomainSearched struct {
+	Domain string `json:"domain"`
+}
+
 func GetQueriedDomains(ctx *fasthttp.RequestCtx) {
-	ctx.WriteString("Get funcionando!")
+	dbconnectorP, err := NewDBConnector("endpoints_admin", "endpoints_db", "26257")
+	if err != nil {
+		fmt.Println("Hubieron problemas creando el conector a la BD")
+	}
+	rows, errQuery := dbconnectorP.connection.Query("SELECT dominio FROM endpoint_table GROUP BY dominio;")
+	if errQuery != nil {
+		log.Fatal(errQuery)
+	}
+	defer rows.Close()
+	listDomains := make([]DomainSearched, 0)
+	for rows.Next() {
+		var dominio string
+		errScan := rows.Scan(&dominio)
+		if errScan != nil {
+			log.Fatal(errScan)
+		}
+		temporalStruct := &DomainSearched{
+			Domain: dominio,
+		}
+		listDomains = append(listDomains, *temporalStruct)
+	}
+	itemList := &ItemsList{
+		Items: listDomains,
+	}
+	itemListMarshall, errMarshall := json.Marshal(itemList)
+	if errMarshall != nil {
+		log.Fatal(errMarshall)
+	}
+	ctx.WriteString(string(itemListMarshall))
 }
 
 func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
