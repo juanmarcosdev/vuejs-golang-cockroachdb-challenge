@@ -84,6 +84,10 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	}
 	mc := &MethodCaller{}
 	endpoints := mc.GetSSLLabsInfo(domain)
+	for len(endpoints) == 0 {
+		time.Sleep(100 * time.Millisecond)
+		endpoints = mc.GetSSLLabsInfo(domain)
+	}
 	serversDefInstantiation := make([]ServersDef, len(endpoints))
 	var country string
 	var organization string
