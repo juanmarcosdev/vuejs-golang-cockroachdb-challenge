@@ -28,7 +28,7 @@ Para poder correr la aplicación debes:
 	* También asegúrate de contar con una conexión a internet, debido a que la aplicación realiza peticiones  una API externa y esto requiere de conexión  a internet.
 ### English
 This application is designed with the software architecture of **microservices**, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine.
-#### Download an installation
+#### Download and installation
 In order to run the application you need to:
 
  1. Have Docker and Docker Compose in your local machine (host machine). Here you can find information about it:
