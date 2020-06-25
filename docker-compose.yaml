@@ -1,24 +1,51 @@
+# Vamos a usar la versión 3 de el archivo docker-compose
 version: "3"
-
+# Tendremos a nuestra disposición 3 servicios:
+# 1. backend: Este microservicio va a ser el encargado de correr el servidor de Go
+# en el puerto 5000 en la máquina host donde se ejecute
+# 2. database: Este otro servicio es quien posee el SGBD de CockroachDB y quien tendrá
+# la base de datos usada en la aplicación, el contenedor de backend enviará comandos a esta base de datos.
+# 3. db-builder: Es un servicio temporal que solo se corre una vez ha terminado de
+# construirse el contenedor de la base de datos (database), y la tarea de este servicio
+# es construir la base de datos con un script de Bash con comandos SQL. Este servicio desaparece una vez
+# ha terminado su tarea.
 services: 
   backend:
+    # El contexto de build del servicio backend es la carpeta backend (pues allí está el Dockerfile respectivo y los archivos .go)
     build: ./backend
     ports:
+    # El backend ejecuta el server en el puerto 5000 del contenedor y aquí hacemos port-forwarding
+    # para que en el mismo puerto 5000 del host se mapee el servidor
       - "5000:5000"
     depends_on: 
+    # El backend no puede vivir sin la base de datos primero, entonces indicamos que depende de ella
+    # y de esa manera se prioriza el despliegue de la base de datos antes del backend
       - database
   database:
+    # El contexto de build de la base de datos es la carpeta db, allí está su Dockerfile y los archivos de script SQL y bash
     build: ./db
     ports:
+    # Por default, una BD de CockroachDB recibe conexiones a la base de datos en el puerto 26257
+    # y ofrece el servicio de cliente web en el 8080, entonces lo que esté proyectando en el contenedor
+    # lo podremos acceder a la máquina host, sin embargo, cabe resaltar que la conexión de backend
+    # a database se hace de contenedor a contenedor y no hacia la máquina host.
       - "26257:26257"
       - "8080:8080"
+    # Para que inicie la base de datos le damos el comando cockroach start
     command: start --insecure --store=endpoints_db
   db-builder:
+    # Este servicio requiere la imagen de CockroachDB para poder ejecutar el comando bash y SQL
+    # de la BD
     image: cockroachdb/cockroach
     volumes: 
+    # Es importante que tenga acceso a los archivos en db/, puesto que allí está el script bash
       - ./db:/db
+    # Nos situamos en la carpeta que contiene los archivos
     working_dir: /db
+    # Le indicaremos que usaremos bash
     entrypoint: "/bin/bash"
+    # Hacemos el comando del script que construye la BD
     command: ./setup_db.sh
+    # De igual manera este servicio no puede ejecutarse si la BD no vive aún
     depends_on: 
       - database
