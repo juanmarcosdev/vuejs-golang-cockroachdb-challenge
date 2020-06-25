@@ -1,2 +1,2 @@
-# vuejs-golang-cockroachdb-challenge
-Repositorio de un reto sobre servicio API REST con dos endpoints, utilizando Vue.js para el Frontend, Go para Backend y CockroachDB para Base de Datos (SQL)
+# Challenge
+![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
