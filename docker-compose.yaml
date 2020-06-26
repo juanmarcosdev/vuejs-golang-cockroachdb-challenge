@@ -25,12 +25,10 @@ services:
     # El contexto de build de la base de datos es la carpeta db, allí está su Dockerfile y los archivos de script SQL y bash
     build: ./db
     ports:
-    # Por default, una BD de CockroachDB recibe conexiones a la base de datos en el puerto 26257
-    # y ofrece el servicio de cliente web en el 8080, entonces lo que esté proyectando en el contenedor
+    # Por default, una BD de CockroachDB recibe conexiones a la base de datos en el puerto 26257, lo que esté proyectando en el contenedor
     # lo podremos acceder a la máquina host, sin embargo, cabe resaltar que la conexión de backend
     # a database se hace de contenedor a contenedor y no hacia la máquina host.
       - "26257:26257"
-      - "8080:8080"
     # Para que inicie la base de datos le damos el comando cockroach start
     command: start --insecure --store=endpoints_db
   db-builder:
