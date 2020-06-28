@@ -77,7 +77,7 @@ Haciendo click hacia el Endpoint #2, verás esta pantalla:
 Donde sencillamente se tiene a disposición el botón de Consultar dominios, que mostrará los dominios que han sido consultados en el Endpoint #1. Esto maneja persistencia con la base de datos, así que es posible cerrar el navegador por completo y volver a la página y seguirán estando los dominios.
 Al dar click en el botón se muestra:
 ![endp2](https://i.ibb.co/txfFtN6/Captura-de-pantalla-2020-06-28-04-13-37.png)
-Si damos click en el botón Desplegar y aún no habíamos hecho consultas en el Endpoint #1, nos arroja error indicándolo:
+ Si damos click en el botón Desplegar y aún no habíamos hecho consultas en el Endpoint #1, nos arroja error indicándolo:
 ![nodominios](https://i.ibb.co/5jrHhmB/Captura-de-pantalla-2020-06-28-03-48-49.png)
 Sin embargo, si se ha consultado 1 o más, notifica que hubo éxito:
 ![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
@@ -158,7 +158,7 @@ If you click to Endpoint #2 you'll see:
 Where we got only a button that you can query all the Domains you have searched for in Endpoint #1. This is handled with persistency using a database, so you can close your browser, return to the page and you still got the information of the queried domains.
 If you click the button shows up this:
 ![endp2](https://i.ibb.co/txfFtN6/Captura-de-pantalla-2020-06-28-04-13-37.png)
-If we click on Show and yet there are no domains that we have searched for in Endpoint #1, it will throw an error saying that:
+ If we click on Show and yet there are no domains that we have searched for in Endpoint #1, it will throw an error saying that:
 ![nodominios](https://i.ibb.co/5jrHhmB/Captura-de-pantalla-2020-06-28-03-48-49.png)
 However if we have already searched one or more domains, it says that was successful:
 ![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
