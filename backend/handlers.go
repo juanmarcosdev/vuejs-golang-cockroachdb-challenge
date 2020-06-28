@@ -80,6 +80,7 @@ type DomainSearched struct {
 // Este es el handler correspondiente al Endpoint 2, donde se pueden obtener
 // los dominios consultados.
 func GetQueriedDomains(ctx *fasthttp.RequestCtx) {
+	ctx.Response.Header.Set("Access-Control-Allow-Origin", "*")
 	// Lo primero que se hace es obtener una conexión a la base de datos de CockroachDB que está en el otro contenedor de Docker
 	dbconnectorP, err := NewDBConnector("endpoints_admin", "defaultdb", "26257")
 	// Si hubieron errores creando la conexión se notifican
@@ -138,6 +139,7 @@ func GetQueriedDomains(ctx *fasthttp.RequestCtx) {
 // Esta función corresponde al primer Endpoint, donde se envía un dominio (POST)
 // y se obtiene información sobre sus servidores.
 func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
+	ctx.Response.Header.Set("Access-Control-Allow-Origin", "*")
 	// El dominio a consultar es obtenido de la URL del endpoint
 	domain, err := ctx.UserValue("domain").(string)
 	// Si no se pudo obtener el dominio de la URL, se notifica el error (bad request)
