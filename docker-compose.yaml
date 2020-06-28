@@ -9,7 +9,16 @@ version: "3"
 # construirse el contenedor de la base de datos (database), y la tarea de este servicio
 # es construir la base de datos con un script de Bash con comandos SQL. Este servicio desaparece una vez
 # ha terminado su tarea.
-services: 
+services:
+  frontend:
+    # El contexto de build del frontend es su misma carpeta (allí está el Dockerfile)
+    build: ./frontend
+    ports:
+    # Exponemos el puerto 8080 del contenedor al host, allí se mostrará el frontend
+      - "8080:8080"
+    depends_on: 
+    # Para que el frontend tenga sentido el backend debe estar disponible
+      - backend 
   backend:
     # El contexto de build del servicio backend es la carpeta backend (pues allí está el Dockerfile respectivo y los archivos .go)
     build: ./backend
@@ -30,7 +39,7 @@ services:
     # a database se hace de contenedor a contenedor y no hacia la máquina host.
       - "26257:26257"
     # Para que inicie la base de datos le damos el comando cockroach start
-    command: start --insecure --store=endpoints_db
+    command: start --insecure --store=endpoints_db_storage
   db-builder:
     # Este servicio requiere la imagen de CockroachDB para poder ejecutar el comando bash y SQL
     # de la BD

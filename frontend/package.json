@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "http-server": "^0.12.3",
     "sweetalert2": "^9.15.2",
     "tailwindcss": "^1.1.2",
     "vue": "^2.6.11",

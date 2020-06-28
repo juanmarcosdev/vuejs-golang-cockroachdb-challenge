@@ -65,7 +65,15 @@ export default {
             .get(`http://localhost:5000/queried/domains`)
             .then(response => {
               this.items = response.data.items;
-              this.showInformation = true;
+              if (this.items.length === 0) {
+                Swal.fire(
+                  "No hay dominios",
+                  "Hasta ahora no se ha consultado ningún dominio, no hay en la base de datos ninguno",
+                  "error"
+                );
+              } else {
+                this.showInformation = true;
+              }
             })
             .catch(error => {
               Swal.showValidationMessage(`Falló la solicitud: ${error}`);
@@ -73,7 +81,7 @@ export default {
         },
         allowOutsideClick: () => !Swal.isLoading()
       }).then(result => {
-        if (result.value) {
+        if (result.value && this.items.length > 0) {
           Swal.fire("Éxito", "Consulta realizada exitosamente", "success");
         }
       });
