@@ -21,7 +21,7 @@ Para poder correr la aplicación debes:
 	* `docker-compose up --build`
 	* El flag `--build` es útil en cuanto a que construirá de cero las imágenes que poseen Dockerfile anexo.
 	* Nota: Para que todo funcione correctamente, debes asegurarte de que en la máquna host (tu máquina) estén libres los puertos:
-		* 3000, donde se accede a la página web (Frontend)
+		* 8080, donde se accede a la página web (Frontend)
 		* 5000, donde se encuentra el servidor corriendo (Backend)
 		* 26257, donde corre el contenedor de persistencia (Base de Datos)
 5. Cuando terminen de levantarse todos los contenedores, ¡ya está listo! puedes acceder a la aplicación desde la página web poniendo localhost:3000 en tu web browser (te sugerimos que uses Google Chrome). 
@@ -45,7 +45,7 @@ In order to run the application you need to:
 	* `docker-compose up --build`
 	* The flag `--build` is useful due to it will build the images from scratch (the microservices that depend on a specific Dockerfile)
 	* Annotation: In order to everything work as expected, you need to be sure that the following ports are not used by other processes:
-		* 3000, where you can access to the web page (Frontend)
+		* 8080, where you can access to the web page (Frontend)
 		* 5000, where the server is running (Backend)
 		* 26257, where the persistance container is running (Database)
 5. When all three containers are up, ¡everything is ready! you can access the application's web page typing localhost:3000 in your web browser (we encourage you to use Google Chrome). 
