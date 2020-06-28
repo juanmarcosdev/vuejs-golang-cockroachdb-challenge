@@ -246,8 +246,6 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	// Si hay problemas creando el conector DB se notifican
 	if err3 != nil {
 		fmt.Println("Hubieron problemas creando el conector a la BD")
-	} else { // Es bueno saber que la conexión se realizó
-		fmt.Println("Conexión establecida!")
 	}
 	// Variable dominio que sirve para extraer el campo "dominio" de la tabla en la DB
 	var dominio string
@@ -283,31 +281,32 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		previousSslGrade = "null"
 		// Como no hay registro de hace una hora o más antes, la información que hemos consultado in-time se almacena en la BD para futuras consultas.
 		dbconnectorP.connection.Query("INSERT INTO defaultdb.endpoint_table VALUES ('" + domain + "','" + valueOfJSONString + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
-	} else { // Si existe registro de hace una hora o más antes, vamos a obtener el grado SSL anterior en dicha consulta y la información de los servers.
-		errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&previousSslGrade)
-		errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&jsonFromServerDB)
-		// Si alguna de las consultas falló, notificarlo
-		if errQuery2 != nil {
-			fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
-		}
-		if errQuery3 != nil {
-			fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
-		}
-		// En inicios se supone que los servidores no han cambiado
-		serversChanged = false
-		// Aquí vamos a formatear a JSON los datos obtenidos de servers de la DB
-		// (Con el formato de []ServersDef)
-		json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
-		// Ahora aquí tenemos dos slices de ServersDef. Lo que haremos será comparar elemento a elemento,
-		// es decir, endpoint a endpoint, al ser structs pueden compararse entre ellos y si difieren en algo pequeño,
-		// serán structs distintos y servers_changed será true. Si resultan ser todo lo mismo
-		// quiere decir que los servers no han cambiado y no se cambiará su valor al iniciado arriba (Seguirá siendo false que hayan cambiado)
-		for i := 0; i < len(serversDefInstantiation); i++ {
-			if serversDefInstantiation[i] != jsonUnmarshalled[i] {
-				serversChanged = true
-			}
+	}
+	// Si existe registro de hace una hora o más antes, vamos a obtener el grado SSL anterior en dicha consulta y la información de los servers.
+	errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&previousSslGrade)
+	errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&jsonFromServerDB)
+	// Si alguna de las consultas falló, notificarlo
+	if errQuery2 != nil {
+		fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
+	}
+	if errQuery3 != nil {
+		fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
+	}
+	// En inicios se supone que los servidores no han cambiado
+	serversChanged = false
+	// Aquí vamos a formatear a JSON los datos obtenidos de servers de la DB
+	// (Con el formato de []ServersDef)
+	json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
+	// Ahora aquí tenemos dos slices de ServersDef. Lo que haremos será comparar elemento a elemento,
+	// es decir, endpoint a endpoint, al ser structs pueden compararse entre ellos y si difieren en algo pequeño,
+	// serán structs distintos y servers_changed será true. Si resultan ser todo lo mismo
+	// quiere decir que los servers no han cambiado y no se cambiará su valor al iniciado arriba (Seguirá siendo false que hayan cambiado)
+	for i := 0; i < len(serversDefInstantiation); i++ {
+		if serversDefInstantiation[i] != jsonUnmarshalled[i] {
+			serversChanged = true
 		}
 	}
+
 	// Finalmente, instanciamos un struct del tipo JSONDef, que nos servirá
 	// para mostrar toda la información en el navegador o como respuesta
 	// a la petición POST. En cada campo le asignamos la información obtenida anteriormente

@@ -1,5 +1,5 @@
 echo "Waiting for containers to be up"
-sleep 10
+sleep 15
 PARAMS="--insecure --host=database"
 SQL="/cockroach/cockroach.sh sql $PARAMS"
 $SQL -e "CREATE USER endpoints_admin;"
