@@ -2,6 +2,8 @@
 ![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
 ## Application Architecture (Arquitectura de la Aplicación)
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
+[Documentación en Español](### Español)
+[English Documentation](### English)
 ### Español
 Esta aplicación está diseñada con una arquitectura de **microservicios**, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux).
 #### Descarga e instalación
