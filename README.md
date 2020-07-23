@@ -5,8 +5,8 @@
 * [Ir a la Documentación en Español](#1-spanish)
 * [Go to English Documentation](#2-english)
 <h3 id="1-spanish">Documentación en Español</h3>
-Esta aplicación está diseñada con una arquitectura de **microservicios**, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux).
-### Descarga e instalación
+Esta aplicación está diseñada con una arquitectura de **microservicios**, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)
+<h4>Descarga e instalación</h4>
 Para poder correr la aplicación debes:
 
  1. Tener instalado Docker y Docker Compose en tu máquina (de ahora en adelante, máquina host). Aquí puedes encontrar información de cómo instalar:
@@ -86,8 +86,8 @@ Sin embargo, si se ha consultado 1 o más, notifica que hubo éxito:
 Y lista a todos los dominios:
 ![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
 <h3 id="2-english">English Documentation</h3>
-This application is designed with the software architecture of **microservices**, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine.
-### Download and installation
+This application is designed with the software architecture of **microservices**, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine
+<h4>Download and installation</h4>
 In order to run the application you need to:
 
  1. Have Docker and Docker Compose in your local machine (host machine). Here you can find information about it:
