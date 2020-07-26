@@ -11,7 +11,7 @@ Esta aplicación está diseñada con una arquitectura de **microservicios**, con
 - a
 - b
 - c
-#### Descarga e instalación
+<h4>Descarga e instalación</h4>
 Para poder correr la aplicación debes:
  1. Tener instalado Docker y Docker Compose en tu máquina (de ahora en adelante, máquina host). Aquí puedes encontrar información de cómo instalar:
 	 - Windows: [Instalar Docker en Windows](https://docs.docker.com/docker-for-windows/install/)
