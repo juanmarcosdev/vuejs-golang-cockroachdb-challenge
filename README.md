@@ -91,15 +91,6 @@ Sin embargo, si se ha consultado 1 o más, notifica que hubo éxito:
 Y lista a todos los dominios:
 ![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
 <h3 id="2-english">English Documentation</h3>
-<h4> What did I learn doing this project? </h4>
-- Vue.js concepts: components, templates, SPA (single page application), different Vue directives such as v-bind, v-router, v-if, v-for, etc.
-- Use of the Tailwind CSS framework.
-- Construction of backend (a server) with the language of Go, using fasthttp and as router fasthttprouter.
-- Go concepts such as: Handlers in Server, Structs, Receiver Functions, Public and private functions, use of library encoding/json for JSON usage, use of library os/exec to execute operating system commands, use of library strings, time, sort
-- Web Scrapping with Go using goquery and x/net/ html libraries
-- Go Server connection with SQL Database through database/sql and lib/pq libraries
-- Creation and management of simple and multi-node cluster of the DBMS CockroachDB
-- Simple application management through microservices using deployment and orchestration with Docker and Docker Compose.
 This application is designed with the software architecture of **microservices**, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine
 <h4>Download and installation</h4>
 In order to run the application you need to:
