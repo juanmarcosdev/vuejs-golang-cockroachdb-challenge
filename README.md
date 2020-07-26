@@ -5,16 +5,17 @@
 * [Ir a la Documentación en Español](#1-spanish)
 * [Go to English Documentation](#2-english)
 <h3 id="1-spanish">Documentación en Español</h3>
-<h4> ¿Qué aprendí realizando este proyecto? </h4>
-* Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc.
-- Uso del framework Tailwind CSS.
-- Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter.
-- Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort
-- Web Scrapping con Go mediante librerías goquery y x/net/html
-- Conexión de Servidor Go con Base de Datos SQL mediante librerías database/sql y lib/pq
-- Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB
-- Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose.
+<h4>Descripción</h4>
 Esta aplicación está diseñada con una arquitectura de **microservicios**, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)
+<h4>¿Qué aprendí realizando este proyecto?</h4>
+* Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc.
+* Uso del framework Tailwind CSS.
+* Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter.
+* Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort
+* Web Scrapping con Go mediante librerías goquery y x/net/html
+* Conexión de Servidor Go con Base de Datos SQL mediante librerías database/sql y lib/pq
+* Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB
+* Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose.
 <h4>Descarga e instalación</h4>
 Para poder correr la aplicación debes:
 
