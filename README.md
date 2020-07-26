@@ -5,9 +5,9 @@
 * [Ir a la Documentación en Español](#1-spanish)
 * [Go to English Documentation](#2-english)
 <h2> Hola </h2>
-- a
-- b
-- c
+* a
+* b
+* c
 <h3 id="1-spanish">Documentación en Español</h3>
 Esta aplicación está diseñada con una arquitectura de **microservicios**, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)
 <h4>Descarga e instalación</h4>
