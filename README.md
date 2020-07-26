@@ -6,7 +6,7 @@
 * [Go to English Documentation](#2-english)
 <h3 id="1-spanish">Documentación en Español</h3>
 <h4> ¿Qué aprendí realizando este proyecto? </h4>
-- Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc.
+* Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc.
 - Uso del framework Tailwind CSS.
 - Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter.
 - Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort
