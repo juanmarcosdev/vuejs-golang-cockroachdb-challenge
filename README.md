@@ -2,6 +2,24 @@
 ![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
 ## Application Architecture (Arquitectura de la Aplicación)
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
+<h2> ¿Qué aprendí realizando este proyecto? </h2>
+* Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc.
+* Uso del framework Tailwind CSS.
+* Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter.
+* Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort
+* Web Scrapping con Go mediante librerías goquery y x/net/html
+* Conexión de Servidor Go con Base de Datos SQL mediante librerías database/sql y lib/pq
+* Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB
+* Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose.
+<h2> What did I learn doing this project? </h2>
+* Vue.js concepts: components, templates, SPA (single page application), different Vue directives such as v-bind, v-router, v-if, v-for, etc.
+* Use of the Tailwind CSS framework.
+* Construction of backend (a server) with the language of Go, using fasthttp and as router fasthttprouter.
+* Go concepts such as: Handlers in Server, Structs, Receiver Functions, Public and private functions, use of library encoding/json for JSON usage, use of library os/exec to execute operating system commands, use of library strings, time, sort
+* Web Scrapping with Go using goquery and x/net/ html libraries
+* Go Server connection with SQL Database through database/sql and lib/pq libraries
+* Creation and management of simple and multi-node cluster of the DBMS CockroachDB
+* Simple application management through microservices using deployment and orchestration with Docker and Docker Compose.
 * [Ir a la Documentación en Español](#1-spanish)
 * [Go to English Documentation](#2-english)
 <h3 id="1-spanish">Documentación en Español</h3>
