@@ -5,101 +5,10 @@
 <p><b> English: </b> This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine</p>
 <p><b> Español: </b> Esta aplicación está diseñada con una arquitectura de <b>microservicios</b>, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)</p>
 <ul>
-	<li><a href="#2-english">Go to English Documentation</a></li>
-	<li><a href="#1-spanish">Ir a la Documentación en Español</a></li>
+	<li><a href="#1-english">Go to English Documentation</a></li>
+	<li><a href="#2-spanish">Ir a la Documentación en Español</a></li>
 </ul>
-<h3 id="1-spanish">Documentación en Español</h3>
-<h2> ¿Qué aprendí llevando a cabo este proyecto? </h2>
-<ul>
-	<li>Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc</li>
-	<li>Uso del framework Tailwind CSS</li>
-	<li>Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter</li>
-	<li>Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort</li>
-	<li>Web Scrapping con Go mediante librerías goquery y x/net/html</li>
-	<li>Conexión de Servidor Go con Base de Datos SQL mediante librerías database/sql y lib/pq</li>
-	<li>Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB</li>
-	<li>Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose</li>
-</ul>
-<h4>Descarga e instalación</h4>
-Para poder correr la aplicación debes:
-
- 1. Tener instalado Docker y Docker Compose en tu máquina (de ahora en adelante, máquina host). Aquí puedes encontrar información de cómo instalar:
-	 - Windows: [Instalar Docker en Windows](https://docs.docker.com/docker-for-windows/install/)
-	 - macOS: [Instalar Docker en macOS](https://docs.docker.com/docker-for-mac/install/)
-	 - Linux: [Instalar Docker en Linux](https://docs.docker.com/engine/install/), [Instalar Docker en Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es)
-	 - Docker Compose: [Instalar Docker Compose en Windows, macOS o Linux](https://docs.docker.com/compose/install/) (dentro de la web, seleccionar la pestaña del sistema operativo correspondiente)
-2. Clonar o descargar este repositorio:
-	* `git clone https://github.com/juanmarcos935/vuejs-golang-cockroachdb-challenge.git` (desde la consola)
-	*  O puedes descargarlo accediendo a la pestaña Clone > elegir la opción "Download ZIP". Debes extraerlo y obtener la carpeta de nombre  `vuejs-golang-cockroachdb-challenge`.
-3. Tras tener la carpeta lista, entramos en ella:
-	* `cd vuejs-golang-cockroachdb-challenge`
-4. Y finalmente debemos ejecutar el comando que levantará todos los 3 contenedores correspondientes a cada microservicio (Frontend, Backend & Database):
-	* `docker-compose up --build`
-	* El flag `--build` es útil en cuanto a que construirá de cero las imágenes que poseen Dockerfile anexo.
-	* Nota: Para que todo funcione correctamente, debes asegurarte de que en la máquna host (tu máquina) estén libres los puertos:
-		* 8080, donde se accede a la página web (Frontend)
-		* 5000, donde se encuentra el servidor corriendo (Backend)
-		* 26257, donde corre el contenedor de persistencia (Base de Datos)
-5. Cuando terminen de levantarse todos los contenedores, ¡ya está listo! puedes acceder a la aplicación desde la página web poniendo localhost:3000 en tu web browser (te sugerimos que uses Google Chrome). 
-	* También asegúrate de contar con una conexión a internet, debido a que la aplicación realiza peticiones  una API externa y esto requiere de conexión  a internet.
-	* Nota: Existe un cuarto (4) contenedor llamado db-builder. Este contenedor es temporal y no hace parte de la arquitectura final de la aplicación, pues su única función es manipular el contenedor de la base de datos (database) e inicializar el esquema de la base de datos. Al finalizar esta tarea, el contenedor muere y solo sobreviven los 3 principales.
-#### Uso
-* Nota: Para el frontend se utilizó el framework Vue.js junto con el preprocesador de CSS, Tailwind CSS
-##### Homepage
-Ya habiéndose desplegado todos los 3 contenedores, puede ingresar a su navegador a la dirección http://localhost:8080 y verá una página similar a esta:
-
-![homepage](https://i.ibb.co/pzwxHt1/Captura-de-pantalla-2020-06-28-03-32-45.png)
-
-Este es el Home, o la página principal. Posee una pequeña descripción acerca del reto. Tienes dos enlaces abajo: uno para dirigirte al Endpoint #1 y otro para acceder al Endpoint #2. 
-
-##### Endpoint #1
-
-Haciendo click hacia el Endpoint #1, verás esta pantalla: 
-
-![endpoint1](https://i.ibb.co/HDNdrvB/Captura-de-pantalla-2020-06-28-03-43-04.png)
-Aquí tienes:
-* Un botón para Realizar consulta.
-* Un enlace para volver a la página de Inicio (Home).
-
-Si haces click sobre el botón de Realizar consulta vas a ver lo siguiente:
-
-![query](https://i.ibb.co/YWqJrXJ/Captura-de-pantalla-2020-06-28-03-46-21.png)
-
-En el campo de texto, puedes colocar el dominio a consultar en el formato 'web.com', como por ejemplo, google.com o github.com.
-Si no especificas un dominio la página lanzará error:
-![error](https://i.ibb.co/2KvDdBb/Captura-de-pantalla-2020-06-28-03-47-51.png)
-
-Sin embargo, si se especifica uno válido, y se le da click al botón Enviar, se hará la solicitud y mientras tanto habrá un loader:
-
-![loader](https://i.ibb.co/cQCFZRV/Captura-de-pantalla-2020-06-28-03-50-11.png)
-Tras haber tenido éxito la petición, se muestra el mensaje:
-![exito](https://i.ibb.co/S7CxvgG/Captura-de-pantalla-2020-06-28-03-51-43.png)
-Dando click en OK, se puede ver la información de la solicitud:
-![registro1](https://i.ibb.co/Zz64y3j/Captura-de-pantalla-2020-06-28-03-53-17.png)
-* Nota 1: Si aparece un valor de "null" en el campo de Anterior Grado SSL, esto se debe a que no existía un registro previo de hace una hora o menos (50 min, 40 min, 30 min, 1 min, etc.) que tuviera información del dominio especificado. Por ejemplo, si se hace una solicitud casi inmediatamente después esta vez tendrá la información correspondiente al primer registro y se mostrará el valor correcto:
-![registro2](https://i.ibb.co/mJrTSYn/Captura-de-pantalla-2020-06-28-03-55-10.png)
-* Nota 2: El web scrapping correspondiente a la búsqueda del enlace o link del logo se hace de tal forma que busca en el HTML del dominio en su etiqueta html -> luego la etiqueta head -> después la etiqueta link -> y busca la etiqueta que tenga como atributo "rel" con el valor de "shortcut icon", y devuelve el valor que posea el atributo "href" de la misma etiqueta. Como en ocasiones los sitios web están estructurados de manera distinta y guardan sus logos en una estructura que no es ésta, no es posible obtener el link del logo, por ello se muestra un campo vacío en la columna correspondiente.
-* Nota 3: También puede suceder que sea un dominio que no sea muy consultado en la API de SSL Labs, y esto conlleve a que cuando se realiza la petición a la API externa de dicha empresa apenas estén realizando los cálculos y tests de seguridad para determinar el grado de sus servidores. También puede ocurrir que el enlace del logo de una página no apunte a un enlace web, sino a una ruta relativa del sistema de archivos del servidor local del dominio. Ambas sucesos suceden en la siguiente consulta:
-![uao](https://i.ibb.co/pyBJBXQ/Captura-de-pantalla-2020-06-28-03-59-40.png)
-* Nota 4: También puede darse el caso de que sea imposible obtener el Owner de los servidores:
-![fb](https://i.ibb.co/GPP1j8Z/Captura-de-pantalla-2020-06-28-04-05-24.png)
-Sin embargo, la herramienta es capaz de obtener información sobre dominios que tienen muchos servidores:
-![netflix](https://i.ibb.co/1frm7Kc/Captura-de-pantalla-2020-06-28-04-07-54.png)
-Y también casos en los que se logra obtener toda la información:
-![youtube](https://i.ibb.co/tsM5yTJ/Captura-de-pantalla-2020-06-28-04-20-26.png)
-##### Endpoint #2
-Haciendo click hacia el Endpoint #2, verás esta pantalla: 
-![endpoint2](https://i.ibb.co/643zqsW/Captura-de-pantalla-2020-06-28-04-11-43.png)
-Donde sencillamente se tiene a disposición el botón de Consultar dominios, que mostrará los dominios que han sido consultados en el Endpoint #1. Esto maneja persistencia con la base de datos, así que es posible cerrar el navegador por completo y volver a la página y seguirán estando los dominios.
-Al dar click en el botón se muestra:
-![endp2](https://i.ibb.co/txfFtN6/Captura-de-pantalla-2020-06-28-04-13-37.png)
- Si damos click en el botón Desplegar y aún no habíamos hecho consultas en el Endpoint #1, nos arroja error indicándolo:
-![nodominios](https://i.ibb.co/5jrHhmB/Captura-de-pantalla-2020-06-28-03-48-49.png)
-Sin embargo, si se ha consultado 1 o más, notifica que hubo éxito:
-![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
-Y lista a todos los dominios:
-![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
-<h3 id="2-english">English Documentation</h3>
+<h3 id="1-english">English Documentation</h3>
 <h2> What did I learn doing this project? </h2>
 <ul>
 	<li>Vue.js concepts: components, templates, SPA (single page application), different Vue directives such as v-bind, v-router, v-if, v-for, etc.</li>
@@ -189,4 +98,95 @@ If you click the button shows up this:
 However if we have already searched one or more domains, it says that was successful:
 ![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
 And lists all the domains:
+![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
+<h3 id="2-spanish">Documentación en Español</h3>
+<h2> ¿Qué aprendí llevando a cabo este proyecto? </h2>
+<ul>
+	<li>Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc</li>
+	<li>Uso del framework Tailwind CSS</li>
+	<li>Construcción de backend (un servidor) con el lenguaje de Go, usando fasthttp y como router fasthttprouter</li>
+	<li>Conceptos de Go como: Handlers en Servidor, Structs, Receiver Functions, Funciones públicas y privadas, uso de librería para JSON encoding/json, uso de librería para ejecutar comandos del sistema operativo os/exec, uso de la librería strings, time, sort</li>
+	<li>Web Scrapping con Go mediante librerías goquery y x/net/html</li>
+	<li>Conexión de Servidor Go con Base de Datos SQL mediante librerías database/sql y lib/pq</li>
+	<li>Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB</li>
+	<li>Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose</li>
+</ul>
+<h4>Descarga e instalación</h4>
+Para poder correr la aplicación debes:
+
+ 1. Tener instalado Docker y Docker Compose en tu máquina (de ahora en adelante, máquina host). Aquí puedes encontrar información de cómo instalar:
+	 - Windows: [Instalar Docker en Windows](https://docs.docker.com/docker-for-windows/install/)
+	 - macOS: [Instalar Docker en macOS](https://docs.docker.com/docker-for-mac/install/)
+	 - Linux: [Instalar Docker en Linux](https://docs.docker.com/engine/install/), [Instalar Docker en Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es)
+	 - Docker Compose: [Instalar Docker Compose en Windows, macOS o Linux](https://docs.docker.com/compose/install/) (dentro de la web, seleccionar la pestaña del sistema operativo correspondiente)
+2. Clonar o descargar este repositorio:
+	* `git clone https://github.com/juanmarcos935/vuejs-golang-cockroachdb-challenge.git` (desde la consola)
+	*  O puedes descargarlo accediendo a la pestaña Clone > elegir la opción "Download ZIP". Debes extraerlo y obtener la carpeta de nombre  `vuejs-golang-cockroachdb-challenge`.
+3. Tras tener la carpeta lista, entramos en ella:
+	* `cd vuejs-golang-cockroachdb-challenge`
+4. Y finalmente debemos ejecutar el comando que levantará todos los 3 contenedores correspondientes a cada microservicio (Frontend, Backend & Database):
+	* `docker-compose up --build`
+	* El flag `--build` es útil en cuanto a que construirá de cero las imágenes que poseen Dockerfile anexo.
+	* Nota: Para que todo funcione correctamente, debes asegurarte de que en la máquna host (tu máquina) estén libres los puertos:
+		* 8080, donde se accede a la página web (Frontend)
+		* 5000, donde se encuentra el servidor corriendo (Backend)
+		* 26257, donde corre el contenedor de persistencia (Base de Datos)
+5. Cuando terminen de levantarse todos los contenedores, ¡ya está listo! puedes acceder a la aplicación desde la página web poniendo localhost:3000 en tu web browser (te sugerimos que uses Google Chrome). 
+	* También asegúrate de contar con una conexión a internet, debido a que la aplicación realiza peticiones  una API externa y esto requiere de conexión  a internet.
+	* Nota: Existe un cuarto (4) contenedor llamado db-builder. Este contenedor es temporal y no hace parte de la arquitectura final de la aplicación, pues su única función es manipular el contenedor de la base de datos (database) e inicializar el esquema de la base de datos. Al finalizar esta tarea, el contenedor muere y solo sobreviven los 3 principales.
+#### Uso
+* Nota: Para el frontend se utilizó el framework Vue.js junto con el preprocesador de CSS, Tailwind CSS
+##### Homepage
+Ya habiéndose desplegado todos los 3 contenedores, puede ingresar a su navegador a la dirección http://localhost:8080 y verá una página similar a esta:
+
+![homepage](https://i.ibb.co/pzwxHt1/Captura-de-pantalla-2020-06-28-03-32-45.png)
+
+Este es el Home, o la página principal. Posee una pequeña descripción acerca del reto. Tienes dos enlaces abajo: uno para dirigirte al Endpoint #1 y otro para acceder al Endpoint #2. 
+
+##### Endpoint #1
+
+Haciendo click hacia el Endpoint #1, verás esta pantalla: 
+
+![endpoint1](https://i.ibb.co/HDNdrvB/Captura-de-pantalla-2020-06-28-03-43-04.png)
+Aquí tienes:
+* Un botón para Realizar consulta.
+* Un enlace para volver a la página de Inicio (Home).
+
+Si haces click sobre el botón de Realizar consulta vas a ver lo siguiente:
+
+![query](https://i.ibb.co/YWqJrXJ/Captura-de-pantalla-2020-06-28-03-46-21.png)
+
+En el campo de texto, puedes colocar el dominio a consultar en el formato 'web.com', como por ejemplo, google.com o github.com.
+Si no especificas un dominio la página lanzará error:
+![error](https://i.ibb.co/2KvDdBb/Captura-de-pantalla-2020-06-28-03-47-51.png)
+
+Sin embargo, si se especifica uno válido, y se le da click al botón Enviar, se hará la solicitud y mientras tanto habrá un loader:
+
+![loader](https://i.ibb.co/cQCFZRV/Captura-de-pantalla-2020-06-28-03-50-11.png)
+Tras haber tenido éxito la petición, se muestra el mensaje:
+![exito](https://i.ibb.co/S7CxvgG/Captura-de-pantalla-2020-06-28-03-51-43.png)
+Dando click en OK, se puede ver la información de la solicitud:
+![registro1](https://i.ibb.co/Zz64y3j/Captura-de-pantalla-2020-06-28-03-53-17.png)
+* Nota 1: Si aparece un valor de "null" en el campo de Anterior Grado SSL, esto se debe a que no existía un registro previo de hace una hora o menos (50 min, 40 min, 30 min, 1 min, etc.) que tuviera información del dominio especificado. Por ejemplo, si se hace una solicitud casi inmediatamente después esta vez tendrá la información correspondiente al primer registro y se mostrará el valor correcto:
+![registro2](https://i.ibb.co/mJrTSYn/Captura-de-pantalla-2020-06-28-03-55-10.png)
+* Nota 2: El web scrapping correspondiente a la búsqueda del enlace o link del logo se hace de tal forma que busca en el HTML del dominio en su etiqueta html -> luego la etiqueta head -> después la etiqueta link -> y busca la etiqueta que tenga como atributo "rel" con el valor de "shortcut icon", y devuelve el valor que posea el atributo "href" de la misma etiqueta. Como en ocasiones los sitios web están estructurados de manera distinta y guardan sus logos en una estructura que no es ésta, no es posible obtener el link del logo, por ello se muestra un campo vacío en la columna correspondiente.
+* Nota 3: También puede suceder que sea un dominio que no sea muy consultado en la API de SSL Labs, y esto conlleve a que cuando se realiza la petición a la API externa de dicha empresa apenas estén realizando los cálculos y tests de seguridad para determinar el grado de sus servidores. También puede ocurrir que el enlace del logo de una página no apunte a un enlace web, sino a una ruta relativa del sistema de archivos del servidor local del dominio. Ambas sucesos suceden en la siguiente consulta:
+![uao](https://i.ibb.co/pyBJBXQ/Captura-de-pantalla-2020-06-28-03-59-40.png)
+* Nota 4: También puede darse el caso de que sea imposible obtener el Owner de los servidores:
+![fb](https://i.ibb.co/GPP1j8Z/Captura-de-pantalla-2020-06-28-04-05-24.png)
+Sin embargo, la herramienta es capaz de obtener información sobre dominios que tienen muchos servidores:
+![netflix](https://i.ibb.co/1frm7Kc/Captura-de-pantalla-2020-06-28-04-07-54.png)
+Y también casos en los que se logra obtener toda la información:
+![youtube](https://i.ibb.co/tsM5yTJ/Captura-de-pantalla-2020-06-28-04-20-26.png)
+##### Endpoint #2
+Haciendo click hacia el Endpoint #2, verás esta pantalla: 
+![endpoint2](https://i.ibb.co/643zqsW/Captura-de-pantalla-2020-06-28-04-11-43.png)
+Donde sencillamente se tiene a disposición el botón de Consultar dominios, que mostrará los dominios que han sido consultados en el Endpoint #1. Esto maneja persistencia con la base de datos, así que es posible cerrar el navegador por completo y volver a la página y seguirán estando los dominios.
+Al dar click en el botón se muestra:
+![endp2](https://i.ibb.co/txfFtN6/Captura-de-pantalla-2020-06-28-04-13-37.png)
+ Si damos click en el botón Desplegar y aún no habíamos hecho consultas en el Endpoint #1, nos arroja error indicándolo:
+![nodominios](https://i.ibb.co/5jrHhmB/Captura-de-pantalla-2020-06-28-03-48-49.png)
+Sin embargo, si se ha consultado 1 o más, notifica que hubo éxito:
+![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
+Y lista a todos los dominios:
 ![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
