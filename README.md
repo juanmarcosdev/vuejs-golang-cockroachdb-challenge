@@ -2,6 +2,8 @@
 ![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
 ## Application Architecture (Arquitectura de la Aplicación)
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
+<p><b> English: </b> This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine</p>
+<p><b> Español: </b> Esta aplicación está diseñada con una arquitectura de <b>microservicios</b>, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)</p>
 * [Ir a la Documentación en Español](#1-spanish)
 * [Go to English Documentation](#2-english)
 <h3 id="1-spanish">Documentación en Español</h3>
@@ -16,8 +18,6 @@
 	<li>Creación y manejo de cluster simple y multi-nodo de el SGBD CockroachDB</li>
 	<li>Manejo de una aplicación sencilla mediante microservicios usando despliegue y orquestación con Docker y Docker Compose</li>
 </ul>
-<h3> Descripción de la Aplicación </h3>
-Esta aplicación está diseñada con una arquitectura de <b>microservicios</b>, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)
 <h4>Descarga e instalación</h4>
 Para poder correr la aplicación debes:
 
@@ -109,8 +109,6 @@ Y lista a todos los dominios:
 	<li>Creation and management of simple and multi-node cluster of the DBMS CockroachDB</li>
 	<li>Simple application management through microservices using deployment and orchestration with Docker and Docker Compose.</li>
 </ul>
-<h3> Application Description </h3>
-This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine
 <h4>Download and installation</h4>
 In order to run the application you need to:
 
