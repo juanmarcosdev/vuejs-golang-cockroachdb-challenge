@@ -1,5 +1,7 @@
 # Challenge (Reto)
 ![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
+<p><b> English: </b> </p>
+<p><b> Español: </b> Esta aplicación es un reto o prueba, que consistía en recibir dominios como google.com o github.com y mostrar información acerca de los mismos, como su estado, los grados de seguridad SSL de cada endpoint o servidor que estuviera asociado al dominio, y algunos elementos que son extraídos del sitio web haciendo uso de web scrapping, como por ejemplo, el link al logo </p>
 # Application Architecture (Arquitectura de la Aplicación)
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
 <p><b> English: </b> This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine</p>
