@@ -4,8 +4,10 @@
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
 <p><b> English: </b> This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine</p>
 <p><b> Español: </b> Esta aplicación está diseñada con una arquitectura de <b>microservicios</b>, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)</p>
-* [Ir a la Documentación en Español](#1-spanish)
-* [Go to English Documentation](#2-english)
+<ul>
+	<li><a href="#2-english">Go to English Documentation</a></li>
+	<li><a href="#1-spanish">Ir a la Documentación en Español</a></li>
+</ul>
 <h3 id="1-spanish">Documentación en Español</h3>
 <h2> ¿Qué aprendí llevando a cabo este proyecto? </h2>
 <ul>
