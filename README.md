@@ -1,6 +1,6 @@
 # Challenge (Reto)
 ![Challenge official image](https://i.ibb.co/rMjNVqn/Captura-de-pantalla-de-2020-06-25-11-31-45.png)
-## Application Architecture (Arquitectura de la Aplicación)
+# Application Architecture (Arquitectura de la Aplicación)
 ![Application Architecture image](https://i.ibb.co/9pRv0Bc/Captura-de-pantalla-de-2020-06-25-11-43-31.png)
 <p><b> English: </b> This application is designed with the software architecture of <b>microservices</b>, built thanks to the use of Docker containers, it means that you can run it having installed only Docker and Docker Compose (Windows, macOS o Linux) on your machine</p>
 <p><b> Español: </b> Esta aplicación está diseñada con una arquitectura de <b>microservicios</b>, construida gracias al uso de contenedores de Docker, quiere decir que para poder correrla sólo tienes que tener instalada en tu máquina Docker y Docker Compose (Windows, macOS o Linux)</p>
@@ -8,8 +8,8 @@
 	<li><a href="#1-english">Go to English Documentation</a></li>
 	<li><a href="#2-spanish">Ir a la Documentación en Español</a></li>
 </ul>
-<h3 id="1-english">English Documentation</h3>
-<h2> What did I learn doing this project? </h2>
+<h2 id="1-english">English Documentation</h3>
+<h3> What did I learn doing this project? </h2>
 <ul>
 	<li>Vue.js concepts: components, templates, SPA (single page application), different Vue directives such as v-bind, v-router, v-if, v-for, etc.</li>
 	<li>Use of the Tailwind CSS framework.</li>
@@ -99,8 +99,8 @@ However if we have already searched one or more domains, it says that was succes
 ![exito2](https://i.ibb.co/BsqLqPK/Captura-de-pantalla-2020-06-28-04-17-07.png)
 And lists all the domains:
 ![listadominios](https://i.ibb.co/xqRGc5t/Captura-de-pantalla-2020-06-28-04-18-18.png)
-<h3 id="2-spanish">Documentación en Español</h3>
-<h2> ¿Qué aprendí llevando a cabo este proyecto? </h2>
+<h2 id="2-spanish">Documentación en Español</h3>
+<h3> ¿Qué aprendí llevando a cabo este proyecto? </h2>
 <ul>
 	<li>Conceptos de Vue.js: componentes, templates, SPA (single page application), distintas directivas de Vue como v-bind, v-router, v-if, v-for, etc</li>
 	<li>Uso del framework Tailwind CSS</li>
