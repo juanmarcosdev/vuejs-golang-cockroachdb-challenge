@@ -39,7 +39,7 @@ services:
     # a database se hace de contenedor a contenedor y no hacia la máquina host.
       - "26257:26257"
     # Para que inicie la base de datos le damos el comando cockroach start
-    command: start --insecure --store=endpoints_challenge_db
+    command: start --insecure --store=endpoints_challenge_sql_db
   db-builder:
     # Este servicio requiere la imagen de CockroachDB para poder ejecutar el comando bash y SQL
     # de la BD

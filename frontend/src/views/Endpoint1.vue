@@ -105,10 +105,10 @@ export default {
         cancelButtonText: "Cancelar",
         showLoaderOnConfirm: true,
         preConfirm: domain => {
-          if (domain === "") {
+          if (/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domain) === false) {
             Swal.fire(
-              "Dominio vacío",
-              "No has ingresado un dominio para consultar",
+              "Dominio inválido",
+              "No has ingresado un dominio válido para ser consultado",
               "error"
             );
           } else {
