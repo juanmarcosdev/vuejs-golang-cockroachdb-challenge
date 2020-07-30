@@ -272,7 +272,7 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 	// un nuevo registro. Si existen registros desde 1 segundo hasta 1 hora, los tiene en cuenta
 	// y con ellos obtiene la info de servers_changed y previous_ssl_grade.
 	// (También de una vez obtiene el valor de dominio de la BD)
-	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&dominio)
+	errQuery := dbconnectorP.connection.QueryRow("SELECT dominio FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&dominio)
 	if errQuery == sql.ErrNoRows {
 		// Si la consulta no arroja resultados, no podemos decir que los servidores hayan cambiado
 		// pues no hay punto de comparación, entonces dicho atributo se setea en false.
@@ -280,11 +280,11 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		// Como no hay registro de hace una hora o más antes, se pone en "null" el campo de previous_ssl_grade
 		previousSslGrade = "null"
 		// Como no hay registro de hace una hora o más antes, la información que hemos consultado in-time se almacena en la BD para futuras consultas.
-		dbconnectorP.connection.Query("INSERT INTO defaultdb.endpoint_table VALUES ('" + domain + "','" + valueOfJSONString + "', '" + lowerGrade + "', now() AT TIME ZONE 'America/Bogota');")
+		dbconnectorP.connection.Query("INSERT INTO defaultdb.endpoint_table VALUES ($1, $2, $3, now() AT TIME ZONE 'America/Bogota');", domain, valueOfJSONString, lowerGrade)
 	}
 	// Si existe registro de hace una hora o más antes, vamos a obtener el grado SSL anterior en dicha consulta y la información de los servers.
-	errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&previousSslGrade)
-	errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = '" + domain + "' AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';").Scan(&jsonFromServerDB)
+	errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&previousSslGrade)
+	errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&jsonFromServerDB)
 	// Si alguna de las consultas falló, notificarlo
 	if errQuery2 != nil {
 		fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
