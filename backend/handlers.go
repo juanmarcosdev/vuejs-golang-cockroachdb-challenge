@@ -281,29 +281,30 @@ func PostDomainAndGetInfo(ctx *fasthttp.RequestCtx) {
 		previousSslGrade = "null"
 		// Como no hay registro de hace una hora o más antes, la información que hemos consultado in-time se almacena en la BD para futuras consultas.
 		dbconnectorP.connection.Query("INSERT INTO defaultdb.endpoint_table VALUES ($1, $2, $3, now() AT TIME ZONE 'America/Bogota');", domain, valueOfJSONString, lowerGrade)
-	}
-	// Si existe registro de hace una hora o más antes, vamos a obtener el grado SSL anterior en dicha consulta y la información de los servers.
-	errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&previousSslGrade)
-	errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&jsonFromServerDB)
-	// Si alguna de las consultas falló, notificarlo
-	if errQuery2 != nil {
-		fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
-	}
-	if errQuery3 != nil {
-		fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
-	}
-	// En inicios se supone que los servidores no han cambiado
-	serversChanged = false
-	// Aquí vamos a formatear a JSON los datos obtenidos de servers de la DB
-	// (Con el formato de []ServersDef)
-	json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
-	// Ahora aquí tenemos dos slices de ServersDef. Lo que haremos será comparar elemento a elemento,
-	// es decir, endpoint a endpoint, al ser structs pueden compararse entre ellos y si difieren en algo pequeño,
-	// serán structs distintos y servers_changed será true. Si resultan ser todo lo mismo
-	// quiere decir que los servers no han cambiado y no se cambiará su valor al iniciado arriba (Seguirá siendo false que hayan cambiado)
-	for i := 0; i < len(serversDefInstantiation); i++ {
-		if serversDefInstantiation[i] != jsonUnmarshalled[i] {
-			serversChanged = true
+	} else {
+		// Si existe registro de hace una hora o más antes, vamos a obtener el grado SSL anterior en dicha consulta y la información de los servers.
+		errQuery2 := dbconnectorP.connection.QueryRow("SELECT grado_ssl FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&previousSslGrade)
+		errQuery3 := dbconnectorP.connection.QueryRow("SELECT info_servers FROM endpoint_table WHERE dominio = $1 AND hora_consulta > NOW() AT TIME ZONE 'America/Bogota' - INTERVAL '1 hour';", domain).Scan(&jsonFromServerDB)
+		// Si alguna de las consultas falló, notificarlo
+		if errQuery2 != nil {
+			fmt.Println("Hubo un error obteniendo el grado anterior SSL de la DB")
+		}
+		if errQuery3 != nil {
+			fmt.Println("Hubo un error obteniendo el JSON de servers de la DB")
+		}
+		// En inicios se supone que los servidores no han cambiado
+		serversChanged = false
+		// Aquí vamos a formatear a JSON los datos obtenidos de servers de la DB
+		// (Con el formato de []ServersDef)
+		json.Unmarshal(jsonFromServerDB, &jsonUnmarshalled)
+		// Ahora aquí tenemos dos slices de ServersDef. Lo que haremos será comparar elemento a elemento,
+		// es decir, endpoint a endpoint, al ser structs pueden compararse entre ellos y si difieren en algo pequeño,
+		// serán structs distintos y servers_changed será true. Si resultan ser todo lo mismo
+		// quiere decir que los servers no han cambiado y no se cambiará su valor al iniciado arriba (Seguirá siendo false que hayan cambiado)
+		for i := 0; i < len(serversDefInstantiation); i++ {
+			if serversDefInstantiation[i] != jsonUnmarshalled[i] {
+				serversChanged = true
+			}
 		}
 	}
 
