@@ -69,7 +69,9 @@ If you click the query button you will see:
 
 In the textfield, you can write the domain that is going to search, using the format 'web.com', for example, google.com or github.com.
 If you don't specify a valid domain it will throw an error:
-![error](https://i.ibb.co/2KvDdBb/Captura-de-pantalla-2020-06-28-03-47-51.png)
+<p align="center">
+<img src="https://i.ibb.co/vZLNC1G/Captura-de-pantalla-de-2020-07-29-17-41-40.png">
+</p>
 
 However, if you specific a valid one, and you click on the Send button, the request will be made and there will be a loader for the time it gets the response:
 
@@ -159,8 +161,10 @@ Si haces click sobre el botón de Realizar consulta vas a ver lo siguiente:
 ![query](https://i.ibb.co/YWqJrXJ/Captura-de-pantalla-2020-06-28-03-46-21.png)
 
 En el campo de texto, puedes colocar el dominio a consultar en el formato 'web.com', como por ejemplo, google.com o github.com.
-Si no especificas un dominio la página lanzará error:
-![error](https://i.ibb.co/2KvDdBb/Captura-de-pantalla-2020-06-28-03-47-51.png)
+Si no especificas un dominio válido la página lanzará error:
+<p align="center">
+<img src="https://i.ibb.co/vZLNC1G/Captura-de-pantalla-de-2020-07-29-17-41-40.png">
+</p>
 
 Sin embargo, si se especifica uno válido, y se le da click al botón Enviar, se hará la solicitud y mientras tanto habrá un loader:
 
