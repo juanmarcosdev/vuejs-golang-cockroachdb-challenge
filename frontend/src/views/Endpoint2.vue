@@ -34,7 +34,7 @@
     </table>
     <router-link
       to="/"
-      class="mt-5 text-xl text-green-600 hover:underline"
+      class="mt-5 text-xl text-purple-600 hover:underline"
     >Volver a la página de Inicio (Home)</router-link>
   </div>
 </template>

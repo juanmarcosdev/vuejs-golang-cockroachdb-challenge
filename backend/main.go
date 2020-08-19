@@ -24,5 +24,6 @@ func main() {
 	log.Fatal(fasthttp.ListenAndServe(":5000",
 		router.Handler))
 	// Se avisa que el server empieza a escuchar en el puerto 5000
-	fmt.Println("server starting on port 5000")
+	fmt.Print("server starting on port 5000")
+	fmt.Print("Backend is ready on port 5000 of localhost")
 }
