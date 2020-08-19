@@ -79,7 +79,7 @@ However, if you specific a valid one, and you click on the Send button, the requ
 If the request is successful, it shows the message:
 ![exito](https://i.ibb.co/q74BcPJ/Captura-de-pantalla-de-2020-08-19-11-11-49.png)
 If you click OK, you can see the information below:
-![registro1](https://i.ibb.co/mF5kK2s/Captura-de-pantalla-de-2020-08-19-11-20-16.png)
+![registro1](https://i.imgur.com/AprLRyi.png)
 * Annotation 1: If there is a "null" value in the Previous SSL Grade, this is because there was no register in the database that is from a hour ago or less (50 min, 40 min, 30 min, 1 min, etc.) that had the information of the specified domain. For example, if you do a query immediately after the first query it will show the right information:
 ![registro2](https://i.ibb.co/Cm02wQy/Captura-de-pantalla-de-2020-08-19-11-14-16.png)
 * Annotation 2: The web scrapping that belongs to the search of the logo link it functions on a certain way: it searches in the HTML of the webpage for an html node -> then for head node -> finally link node -> and searches for the node that has "rel" property with value "shortcut icon", and returns the value of "href" of the self node that fits the condition. Because all webpages have different structure of saving their icon or logo, if a site doesn't have this structure it won't show any value in logo field. 
@@ -172,7 +172,7 @@ Sin embargo, si se especifica uno válido, y se le da click al botón Enviar, se
 Tras haber tenido éxito la petición, se muestra el mensaje:
 ![exito](https://i.ibb.co/q74BcPJ/Captura-de-pantalla-de-2020-08-19-11-11-49.png)
 Dando click en OK, se puede ver la información de la solicitud:
-![registro1](https://i.ibb.co/mF5kK2s/Captura-de-pantalla-de-2020-08-19-11-20-16.png)
+![registro1](https://i.imgur.com/AprLRyi.png)
 * Nota 1: Si aparece un valor de "null" en el campo de Anterior Grado SSL, esto se debe a que no existía un registro previo de hace una hora o menos (50 min, 40 min, 30 min, 1 min, etc.) que tuviera información del dominio especificado. Por ejemplo, si se hace una solicitud casi inmediatamente después esta vez tendrá la información correspondiente al primer registro y se mostrará el valor correcto:
 ![registro2](https://i.ibb.co/Cm02wQy/Captura-de-pantalla-de-2020-08-19-11-14-16.png)
 * Nota 2: El web scrapping correspondiente a la búsqueda del enlace o link del logo se hace de tal forma que busca en el HTML del dominio en su etiqueta html -> luego la etiqueta head -> después la etiqueta link -> y busca la etiqueta que tenga como atributo "rel" con el valor de "shortcut icon", y devuelve el valor que posea el atributo "href" de la misma etiqueta. Como en ocasiones los sitios web están estructurados de manera distinta y guardan sus logos en una estructura que no es ésta, no es posible obtener el link del logo, por ello se muestra un campo vacío en la columna correspondiente.
