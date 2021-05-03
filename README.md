@@ -7,7 +7,7 @@
 <ul>
   <li><h4>Programming Language used:</h4>JavaScript (Vue.js) - Frontend, Golang - Backend, CockroachDB (PG-SQL) - Database</li>
   <li><h4>Approximate date:</h4>First semester of 2020</li>
-  <li><h4>Purpose: This project was part of the selection process of a company, it consists of a full stack application that aims to obtain information about servers of any specified web domain, such as SSL grade, if the server is on, if it has changed respect to records of an hour or less ago, and certain web scrapping such as its title and its logo. In addition, the application had to preserve (data persistence) the consulted domains. For the Frontend I used Vue.js, for the Backend Golang, and the database in CockroachDB. These were non-functional requirements. Additionally, a deployment job was done using Docker containers together with Docker Compose.</h4></li>
+  <li><h4>Purpose</h4>: This project was part of the selection process of a company, it consists of a full stack application that aims to obtain information about servers of any specified web domain, such as SSL grade, if the server is on, if it has changed respect to records of an hour or less ago, and certain web scrapping such as its title and its logo. In addition, the application had to preserve (data persistence) the consulted domains. For the Frontend I used Vue.js, for the Backend Golang, and the database in CockroachDB. These were non-functional requirements. Additionally, a deployment job was done using Docker containers together with Docker Compose.</li>
   <li><h4>Preview:</h4></li>
 </ul>
 <p align="center">
@@ -45,4 +45,22 @@
 </p>
 <p align="center">
     <img src="https://i.ibb.co/93HgWJ1/Captura-de-pantalla-de-2020-08-19-11-41-07.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/MpVNK6B/Captura-de-pantalla-de-2020-08-19-11-43-18.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/FXWmVhn/Captura-de-pantalla-de-2020-08-19-11-45-13.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/Wn3M82H/Captura-de-pantalla-de-2020-08-19-11-46-41.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/rmh51zw/Captura-de-pantalla-de-2020-08-19-11-54-56.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/mG2Pr4R/Captura-de-pantalla-de-2020-08-19-11-50-07.png">
+</p>
+<p align="center">
+    <img src="https://i.ibb.co/C7XCxzk/Captura-de-pantalla-de-2020-08-19-11-52-22.png">
 </p>
