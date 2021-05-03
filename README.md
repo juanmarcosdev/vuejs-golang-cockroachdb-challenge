@@ -1,7 +1,7 @@
 <h1>TL;DR for this repo:</h1>
 <img src="https://i.imgur.com/oUH9hNy.png" height="100" width="100">
-<img src="https://www.nicepng.com/png/detail/264-2641184_111-kb-png-golang-logo.png" height="100" width="100">
-<img src="https://8logos.com/wp-content/uploads/2018/08/cockroachdb.svg-converted.png?t=1" height="100" width="100">
+<img src="https://ichi.pro/assets/images/max/724/1*vmFSpk9xtpxAHkH7cmt-3Q.png" height="100" width="100">
+<img src="https://secure.meetupstatic.com/photos/event/3/8/1/d/600_488594365.jpeg" height="100" width="100">
 <ul>
   <li><h4>Programming Language used:</h4>JavaScript (Vue.js) - Frontend, Golang - Backend, CockroachDB (PG-SQL) - Database</li>
   <li><h4>Approximate date:</h4>First semester of 2020</li>
